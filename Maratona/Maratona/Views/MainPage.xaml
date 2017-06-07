@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Maratona"
+             x:Class="Maratona.Views.MainPage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Incluir" Command="{Binding AddGroceryItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand">
+        <StackLayout Spacing="0"
+                     Padding="10"
+                     Orientation="Horizontal">
+            <controls:CircleImage Source="{Binding UserProfileImage}" Aspect="AspectFill" Margin="20">
+                <controls:CircleImage.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double"
+                                iOS="55"
+                                Android="80"/>
+                </controls:CircleImage.WidthRequest>
+                <controls:CircleImage.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double"
+                                iOS="55"
+                                Android="80"/>
+                </controls:CircleImage.HeightRequest>
+            </controls:CircleImage>
+        
+            <Label Text="{Binding UserName}" FontSize="Large" VerticalOptions="Center" />
+        </StackLayout>
+        <StackLayout>
+            <Label Text="Listas de Compras" />
+            <ListView ItemsSource="{Binding GroceryListItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" Detail="{Binding GroceryNameAmount}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
