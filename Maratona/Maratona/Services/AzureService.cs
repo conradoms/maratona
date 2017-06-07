@@ -13,7 +13,6 @@ namespace Maratona.Services
 {
     public class AzureService
     {
-        //mudanças
         static readonly string AppUrl = "http://notification-xamarin.azurewebsites.net/";
         public MobileServiceClient Client { get; set; } = null;
         List<AppServiceIdentity> identities = null;
