@@ -6,10 +6,10 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Item da lista de compras" />
-            <Entry Placeholder="Nome" />
-            <Entry Placeholder="Tipo" />
-            <Entry Placeholder="Qtd" />
-            <Button Text="Salvar" BorderRadius="35" />
+            <Entry Placeholder="Nome" Text="{Binding Nome}" />
+            <Entry Placeholder="Tipo" Text="{Binding Type}" />
+            <Entry Placeholder="Qtd" Keyboard="Numeric" Text="{Binding Amount}" />
+            <Button Text="Salvar" BorderRadius="55" BackgroundColor="Blue" TextColor="White" Command="{Binding SaveChangesCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

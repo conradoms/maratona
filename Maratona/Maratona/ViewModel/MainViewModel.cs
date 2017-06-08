@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Maratona.Model;
 using Maratona.Services;
 using MvvmHelpers;
+using Maratona.Services.Interfaces;
 
 namespace Maratona.ViewModel
 {
@@ -15,9 +16,8 @@ namespace Maratona.ViewModel
         public string UserProfileImage { get; set; }
         public string UserName { get; set; }
         public Command AddGroceryItemCommand { get; }
-        public ObservableRangeCollection<GroceryListItem> GroceryListItem { get; }
-        UserApi userApi;
-
+        public ObservableCollection<GroceryListItem> GroceryListItem { get; }
+        
         public MainViewModel()
         {
             UserId = Settings.UserId;
@@ -25,18 +25,22 @@ namespace Maratona.ViewModel
             UserProfileImage = Settings.UserImage;
             UserName = Settings.UserName;
             AddGroceryItemCommand = new Command(ExecuteAddGroceryItem);
-            userApi = DependencyService.Get<UserApi>();
+
+            using (var data = new DBAccess())
+            {
+                GroceryListItem = new ObservableCollection<Model.GroceryListItem>(data.GetItems());
+            }
 
             //GroceryListItem = new ObservableCollection<Model.GroceryListItem>();
             //loadDummyData();
-            loadAzureData();
+            //loadAzureData();
         }
 
-        private async void loadAzureData()
-        {
-            var items = await userApi.GetGroceryListItems();
-            GroceryListItem.AddRange(items);
-        }
+        //private async void loadAzureData()
+        //{
+        //    var items = await userApi.GetGroceryListItems();
+        //    GroceryListItem.AddRange(items);
+        //}
 
         private void loadDummyData()
         {
