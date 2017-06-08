@@ -3,7 +3,7 @@ using Maratona.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Maratona.ViewModel
+namespace Maratona.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {

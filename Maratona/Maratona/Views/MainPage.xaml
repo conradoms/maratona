@@ -31,7 +31,7 @@
         </StackLayout>
         <StackLayout>
             <Label Text="Listas de Compras" />
-            <ListView ItemsSource="{Binding GroceryListItem}">
+            <ListView ItemsSource="{Binding GroceryListItem}" ItemSelected="ListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}" Detail="{Binding GroceryNameAmount}"/>

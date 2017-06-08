@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Maratona.ViewModel
+namespace Maratona.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
@@ -98,6 +98,11 @@ namespace Maratona.ViewModel
             }
 
             await Application.Current.MainPage.Navigation.PushModalAsync(page);
+        }
+
+        public void PopModalAsync()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
         public virtual Task LoadAsync()

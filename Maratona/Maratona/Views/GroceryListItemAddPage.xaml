@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maratona.Views.GroceryListItemAddPage"
+             Title="Lista - Arrumar">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Inluir novo item" FontSize="Large" />
+            <Entry Placeholder="Nome" Text="{Binding Nome}" />
+            <Entry Placeholder="Tipo" Text="{Binding Type}" />
+            <Entry Placeholder="Qtd" Keyboard="Numeric" Text="{Binding Amount}" />
+            <Button Text="Cancelar" BorderRadius="55" BackgroundColor="Red" TextColor="White" Command="{Binding CancelCommand}" />
+            <Button Text="Salvar" BorderRadius="55" BackgroundColor="Blue" TextColor="White" Command="{Binding SaveChangesCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

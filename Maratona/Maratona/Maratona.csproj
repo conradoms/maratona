@@ -45,11 +45,15 @@
     <Compile Include="Model\GroceryListItem.cs" />
     <Compile Include="Services\DBAccess.cs" />
     <Compile Include="Services\Interfaces\IConfig.cs" />
-    <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\GroceryListItemViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="Views\GroceryListItemPage.xaml.cs">
-      <DependentUpon>GroceryListItemPage.xaml</DependentUpon>
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\GroceryListItemAddViewModel.cs" />
+    <Compile Include="ViewModels\GroceryListItemEditViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Views\GroceryListItemEditPage.xaml.cs">
+      <DependentUpon>GroceryListItemEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GroceryListItemAddPage.xaml.cs">
+      <DependentUpon>GroceryListItemAddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -57,7 +61,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureService.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -145,7 +149,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\GroceryListItemPage.xaml">
+    <EmbeddedResource Include="Views\GroceryListItemAddPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\GroceryListItemEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

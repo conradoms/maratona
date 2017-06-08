@@ -7,13 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Maratona.ViewModel
+namespace Maratona.ViewModels
 {
-    public class GroceryListItemViewModel : BaseViewModel
+    public class GroceryListItemEditViewModel : BaseViewModel
     {
-        public GroceryListItem groceryListItem { get; set; }
+        public GroceryListItem GroceryListItem { get; set; }
 
-        public int Id { get; set; } = 0;
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
 
         private string _nome;
 
@@ -53,26 +60,39 @@ namespace Maratona.ViewModel
 
         public Command SaveChangesCommand { get; }
 
-        public GroceryListItemViewModel()
+        public Command CancelCommand { get; }
+
+        public GroceryListItemEditViewModel(GroceryListItem groceryListItem)
         {
             SaveChangesCommand = new Command(ExecuteSaveChangesCommand);
+            CancelCommand = new Command(ExecuteCancelCommand);
+            GroceryListItem = groceryListItem;
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            Id = GroceryListItem.Id;
+            Nome = GroceryListItem.Name;
+            Type = GroceryListItem.Type;
+            Amount = GroceryListItem.Amount;
         }
 
         private void ExecuteSaveChangesCommand()
         {
             using (var db = new DBAccess())
             {
-                if (Id == 0)
-                {
-                    groceryListItem = new GroceryListItem()
-                    {
-                        Name = Nome,
-                        Type = Type,
-                        Amount = Amount
-                    };
-                    db.InsertItem(groceryListItem);
-                }
+                GroceryListItem.Name = Nome;
+                GroceryListItem.Type = Type;
+                GroceryListItem.Amount = Amount;
+
+                db.UpdateItem(GroceryListItem);
             }
+        }
+
+        private void ExecuteCancelCommand()
+        {
+            PopModalAsync();
         }
 
         private bool CanExecuteSaveChangesCommand()

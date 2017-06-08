@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Maratona.ViewModels;
 using Xamarin.Forms;
 
 namespace Maratona.Views
 {
     public partial class MainPage : ContentPage
     {
+        private MainViewModel ViewModel => BindingContext as MainViewModel;
+
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainViewModel();
             //CreateLayout();
         }
 
@@ -92,6 +91,14 @@ namespace Maratona.Views
                     }
                 }
             };            
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+            {
+                ViewModel.EditGroceryItemCommand.Execute(e.SelectedItem);
+            }
         }
     }
 }

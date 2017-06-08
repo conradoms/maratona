@@ -7,7 +7,7 @@ using Maratona.Services;
 using MvvmHelpers;
 using Maratona.Services.Interfaces;
 
-namespace Maratona.ViewModel
+namespace Maratona.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
@@ -16,6 +16,7 @@ namespace Maratona.ViewModel
         public string UserProfileImage { get; set; }
         public string UserName { get; set; }
         public Command AddGroceryItemCommand { get; }
+        public Command EditGroceryItemCommand { get; }
         public ObservableCollection<GroceryListItem> GroceryListItem { get; }
         
         public MainViewModel()
@@ -24,7 +25,8 @@ namespace Maratona.ViewModel
             Token = Settings.AuthToken;
             UserProfileImage = Settings.UserImage;
             UserName = Settings.UserName;
-            AddGroceryItemCommand = new Command(ExecuteAddGroceryItem);
+            AddGroceryItemCommand = new Command(ExecuteAddGroceryItemCommand);
+            EditGroceryItemCommand = new Command<GroceryListItem>(ExecuteEditGroceryItemCommand);
 
             using (var data = new DBAccess())
             {
@@ -33,15 +35,8 @@ namespace Maratona.ViewModel
 
             //GroceryListItem = new ObservableCollection<Model.GroceryListItem>();
             //loadDummyData();
-            //loadAzureData();
         }
-
-        //private async void loadAzureData()
-        //{
-        //    var items = await userApi.GetGroceryListItems();
-        //    GroceryListItem.AddRange(items);
-        //}
-
+        
         private void loadDummyData()
         {
             GroceryListItem.Add(
@@ -77,9 +72,21 @@ namespace Maratona.ViewModel
                 });
         }
 
-        private async void ExecuteAddGroceryItem()
+        private async void ExecuteAddGroceryItemCommand()
         {
-            await PushModalAsync<GroceryListItemViewModel>();
+            await PushModalAsync<GroceryListItemAddViewModel>();
+        }
+
+        private async void ExecuteEditGroceryItemCommand(GroceryListItem groceryListItem)
+        {
+            try
+            {
+                await PushModalAsync<GroceryListItemEditViewModel>(groceryListItem);
+            }
+            catch (Exception ex)
+            {
+                var teste = ex.Message;
+            }
         }
     }
 }
